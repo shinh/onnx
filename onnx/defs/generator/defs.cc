@@ -52,7 +52,7 @@ ONNX_OPERATOR_SET_SCHEMA(
             0,
             "input",
             "1D tensor. The shape of the expected output tensor. If empty tensor is given, the output would be a scalar.",
-            "T1")
+            "tensor(int64)")
         .Output(
             0,
             "output",
@@ -60,14 +60,9 @@ ONNX_OPERATOR_SET_SCHEMA(
             "If attribute 'value' is specified, the value and datatype of the output tensor is taken from 'value'."
             "If attribute 'value' is not specified, the value in the output defaults to 0, and the datatype "
             "defaults to float32.",
-            "T2")
+            "T")
         .TypeConstraint(
-            "T1",
-            {"tensor(int32)",
-             "tensor(int64)"},
-            "Constrain input types. Shape must be unsigned integers.")
-        .TypeConstraint(
-            "T2",
+            "T",
             {"tensor(float16)",
              "tensor(float)",
              "tensor(double)",

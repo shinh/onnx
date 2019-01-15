@@ -164,20 +164,16 @@ ONNX_OPERATOR_SET_SCHEMA(
             0,
             "input",
             "Input tensor (optional) to provide shape information.",
-            "T1",
+            "tensor(int64)",
             OpSchema::Optional)
         .Output(
             0,
             "output",
             "Output tensor of constant values specified by 'value'"
             "argument and its type is specified by the 'dtype' argument",
-            "T2")
+            "T")
         .TypeConstraint(
-            "T1",
-            {"tensor(float)", "tensor(int32)", "tensor(int64)", "tensor(bool)"},
-            "Constrain input types to float, int32, int64, bool tensors.")
-        .TypeConstraint(
-            "T2",
+            "T",
             {"tensor(float)", "tensor(int32)", "tensor(int64)", "tensor(bool)"},
             "Constrain output types to float, int32, int64, bool tensors.")
         .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {

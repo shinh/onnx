@@ -455,6 +455,15 @@ class TestShapeInference(unittest.TestCase):
             [])
         self._assert_inferred(graph, [make_tensor_value_info('y', TensorProto.FLOAT, (4, 5, 6))])  # type: ignore
 
+    def test_scatternd_unknown_input_shape(self):  # type: () -> None
+        graph = self._make_graph(
+            [('x', TensorProto.FLOAT, None),
+             ('indices', TensorProto.INT64, (3, 3, 2)),
+             ('updates', TensorProto.FLOAT, (3, 3, 6))],
+            [make_node("ScatterND", ['x', 'indices', 'updates'], ['y'])],
+            [])
+        self._assert_inferred(graph, [make_tensor_value_info('y', TensorProto.FLOAT, None)])  # type: ignore
+
     def test_squeeze(self):  # type: () -> None
         graph = self._make_graph(
             [('x', TensorProto.FLOAT, (1, 3, 1, 1, 2, 1))],
